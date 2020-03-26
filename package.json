@@ -1,0 +1,23 @@
+{
+  "name": "1_poolup_chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "dev": "env-cmd -r ./config/.env-cmdrc -e development nodemon ./src/server.js",
+    "demo": "env-cmd -r ./config/.env-cmdrc -e development,demo nodemon ./src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "dotenv": "^8.2.0",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.6",
+    "nodemon": "^2.0.2",
+    "socket.io": "^2.3.0"
+  }
+}
