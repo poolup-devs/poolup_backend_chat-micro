@@ -22,8 +22,8 @@ io.on("connection", (socket)=> {
     socket.on("join", ({username, room}, callback) =>{
         chatroom_id = room;
         _username = jwt.verify(username, JWT_SECRET_KEY).username
-        console.log(_username)
-        console.log(chatroom_id)
+        // console.log(_username)
+        // console.log(chatroom_id)
         socket.join(chatroom_id)       //allows to join the given chatroom of the room name
         // socket.emit("message", generateMessage("Admin", "Welcome!"))
         
@@ -47,7 +47,7 @@ io.on("connection", (socket)=> {
     //     callback()
     // })
 
-    socket.on("sendMessage", (message, callback)=>{
+    socket.on("sendMessage", (message, callback) => {
         // console.log(chatroom_id)
         // const user = getUser(socket.id)
         // const filter = new Filter()
@@ -60,7 +60,11 @@ io.on("connection", (socket)=> {
         //     }
         // })
         // io.to(chatroom_id).emit("message", {_username, message, createdAt: new Date().getTime()});
-
+        db.createMessage(chatroom_id, _username, message, (err, data) => {
+            if(err) {
+                console.log("[ERROR]: db.createMessage() failure")
+            }
+        })
         io.to(chatroom_id).emit("message", generateMessage(_username, message));
         callback()
     })

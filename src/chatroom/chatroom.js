@@ -2,7 +2,12 @@ const mongoose = require("mongoose");
 
 const chatroomSchema = mongoose.Schema({
     driver_username: String,
-    passenger_list: Array,
+    user_list: Array,
+    updatedAt: Date,
+    live: {
+        type: Boolean,
+        default: true
+    },
     createdAt: {
         type: Date,
         default: new Date()
