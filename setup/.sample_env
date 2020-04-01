@@ -1,0 +1,20 @@
+{
+  "development": {
+    "MODE": "STAGING",
+    "PORT": "3001",
+    "JWT_SECRET_KEY": <ENTER SECRET KEY HERE>,
+    "MONGODB_URL": "mongodb://localhost/poolup-dev-chat"
+  },
+  "demo": {
+    "MODE": "DEMO"
+  },
+  "development-docker": {
+    "MONGODB_URL":"mongodb://mongo:27017/poolup-dev-chat"
+  },
+  "testing-docker": {
+    "MONGODB_URL":"mongodb://mongo:27017/poolup-test-chat"
+  },
+  "testing": {
+    "MONGODB_URL": "mongodb://localhost/poolup-test-chat"
+  }
+}

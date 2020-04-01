@@ -1,6 +1,8 @@
 const Message = require("./message.js").Message;
 const Chatroom = require("../chatroom/chatroom.js").Chatroom;
 
+const errpkt = require("../utils/controller-errorPacket.js");
+
 const createMessage = (chatroom_id, owner_username, content, callback) => {
   const message = 
   {
@@ -11,11 +13,11 @@ const createMessage = (chatroom_id, owner_username, content, callback) => {
   };
     Message.create(message, (err, res) => {
         if (err) {
-          callback(err, null);
+          callback(errpkt(500, err), null);
         } else {
-          Chatroom.updateOne({chatroom_id}, {updatedAt: new Date()}, (err_, res_) => {
-            if(err_) {
-              callback(err, null);
+          Chatroom.updateOne({chatroom_id}, {updatedAt: new Date()}, (_err, _res) => {
+            if(_err) {
+              callback(errpkt(500, _err), null);
             } else {
               callback(null, res);
             }
@@ -24,11 +26,10 @@ const createMessage = (chatroom_id, owner_username, content, callback) => {
     });
 }
 
-const getMessageHistory = (chatroom_id, callback) => {
-  console.log("called with" + chatroom_id)
+const getMessageInChatroom = (chatroom_id, callback) => {
   Message.find({chatroom_id}, (err, res) => {
     if (err) {
-      callback(err,null);
+      callback(errpkt(500, err),null);
     } else {
       callback(null, res);
     }
@@ -36,7 +37,6 @@ const getMessageHistory = (chatroom_id, callback) => {
 }
 
 const deleteMessage = (_id, callback) => {
-  console.log(_id)
   Message.findByIdAndDelete(_id, (err, res) => {
     if(err) {
       callback(err, null);
@@ -48,6 +48,6 @@ const deleteMessage = (_id, callback) => {
 
 module.exports = {
     createMessage,
-    getMessageHistory,
+    getMessageInChatroom,
     deleteMessage
 }

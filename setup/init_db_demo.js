@@ -1,8 +1,8 @@
-require("./src/db/mongoose.js");
+require("../src/db/mongoose.js");
 const jwt = require("jsonwebtoken");
 const chalk = require("chalk")
 
-const Chatroom = require("./src/chatroom/chatroom.js").Chatroom;
+const Chatroom = require("../src/chatroom/chatroom.js").Chatroom;
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 // const JWT_SECRET_KEY = "E710E73E4A6A87286F4867761FEE9ED124544B86EB8E0C22E38B90ED27035A95";
@@ -30,7 +30,9 @@ const users = [user1, user_rider1, user_rider2];
 
 const chatroom_demo = {
     driver_username: user1.username,
-    passenger_list: [user_rider1.username, user_rider2.username]
+    user_list: [user1.username, user_rider1.username, user_rider2.username],
+    updatedAt: new Date(),
+    createdAt: new Date()
 }
 
 const chatroom_seed = () => {
